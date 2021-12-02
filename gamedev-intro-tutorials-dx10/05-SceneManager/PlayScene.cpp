@@ -12,6 +12,8 @@
 
 #include "SampleKeyEventHandler.h"
 
+#include "DirectXLibrary.h" 
+
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):

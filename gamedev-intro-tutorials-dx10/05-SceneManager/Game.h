@@ -1,23 +1,16 @@
 #pragma once
 #include <Windows.h>
-#include <d3d10.h>
-#include <d3dx10.h>
 #include <unordered_map>
 
 using namespace std;
 
-#define DIRECTINPUT_VERSION 0x0800
-#include <dinput.h>
+
 
 #include "Texture.h"
 #include "KeyEventHandler.h"
 #include "Scene.h"
 
 #define MAX_FRAME_RATE 100
-#define KEYBOARD_BUFFER_SIZE 1024
-#define KEYBOARD_STATE_SIZE 256
-
-
 
 /*
 	Our simple game framework
@@ -36,13 +29,6 @@ class CGame
 	ID3D10BlendState* pBlendStateAlpha = NULL;			// To store alpha blending state
 
 	LPD3DX10SPRITE spriteObject;						// Sprite handling object, BIG MYSTERY: it has to be in this place OR will lead to access violation in D3D11.dll ????
-
-	LPDIRECTINPUT8       di;		// The DirectInput object         
-	LPDIRECTINPUTDEVICE8 didv;		// The keyboard device 
-
-	BYTE  keyStates[KEYBOARD_STATE_SIZE];			// DirectInput keyboard state buffer 
-	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
-
 	LPKEYEVENTHANDLER keyHandler;
 
 	float cam_x = 0.0f;
@@ -82,9 +68,7 @@ public:
 	LPTEXTURE LoadTexture(LPCWSTR texturePath);
 
 	// Keyboard related functions 
-	void InitKeyboard();
-	int IsKeyDown(int KeyCode);
-	void ProcessKeyboard();
+	
 	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
 
 
@@ -110,7 +94,6 @@ public:
 	void Load(LPCWSTR gameFile);
 	void SwitchScene();
 	void InitiateSwitchScene(int scene_id);
-
 	void _ParseSection_TEXTURES(string line);
 
 

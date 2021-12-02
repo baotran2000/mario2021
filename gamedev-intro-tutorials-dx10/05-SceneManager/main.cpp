@@ -43,6 +43,8 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 
 #include "AssetIDs.h"
 
+#include "Keyboard.h"
+
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
@@ -173,7 +175,7 @@ int Run()
 		{
 			frameStart = now;
 
-			CGame::GetInstance()->ProcessKeyboard();			
+			Keyboard::GetInstance()->Process();			
 			Update(dt);
 			Render();
 
@@ -198,7 +200,7 @@ int WINAPI WinMain(
 
 	LPGAME game = CGame::GetInstance();
 	game->Init(hWnd, hInstance);
-	game->InitKeyboard();
+	Keyboard::GetInstance()->Init(hWnd);
 
 
 	//IMPORTANT: this is the only place where a hardcoded file name is allowed ! 
